@@ -21,14 +21,14 @@ podTemplate(label: label,
 		stage('Docker consumer Build') {
 			container('consumer') {
 				echo "Building consumer docker image..."
-			    sh "printenv && cd /home/jenkins/agent/workspace/ && ls -l"
+			    sh "printenv && cd /home/jenkins/agent/workspace/project1 && ls -l"
 				//sh "cd /var/poject/devopsk8sproject/consumer && docker build"
 			}
 		}
 		stage('Docker producer Build') {
         			container('producer') {
         				echo "Building consumer docker image..."
-						sh "printenv && cd /home/jenkins/agent/workspace/ && ls -l"
+						sh "printenv && cd /home/jenkins/agent/workspace/project1 && ls -l"
         				
         				//sh "cd /var/poject/devopsk8sproject/producer && docker build"
         			}
