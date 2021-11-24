@@ -29,7 +29,7 @@ podTemplate(label: label,
 			container('consumer') {
 				echo "Building consumer docker image..."
 			    sh "printenv"
-				sh "cd devopsk8sproject/consumer && docker build"
+				sh "cd devopsk8sproject/consumer && docker build ."
 			}
 		}
 		stage('Docker producer Build') {
@@ -37,7 +37,7 @@ podTemplate(label: label,
         				echo "Building consumer docker image..."
 						sh "printenv"
         				
-        				sh "cd devopsk8sproject/producer && docker build"
+        				sh "cd devopsk8sproject/producer && docker build ."
         			}
         		}
 	}
