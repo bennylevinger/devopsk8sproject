@@ -16,7 +16,7 @@ podTemplate(label: label,
 		],
 )
 pipeline {
-
+   agent none
 
 	stages {
 	   stage('Git Clone') {
