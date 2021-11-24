@@ -4,19 +4,37 @@ def home = "/home/jenkins"
 def workspace = "${home}/workspace/build-docker-jenkins"
 def workdir = "${workspace}/src/localhost/docker-jenkins/"
 
-podTemplate(label: label,
-		containers: [
-				containerTemplate(name: 'jnlp', image: 'jenkins/jnlp-slave:alpine'),
-				containerTemplate(name: 'consumer', image: 'docker', command: 'cat', ttyEnabled: true),
-				containerTemplate(name: 'producer', image: 'docker', command: 'cat', ttyEnabled: true),
-		],
-		volumes: [
-				hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'),
-				//hostPathVolume(hostPath: '/var/jenkins_home/workspace/', mountPath: '/home/jenkins/agent/workspace'),
-		],
-)
+
 pipeline {
-   agent none
+   kubernetes {
+            label 'builder'
+            yaml """
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: jnlp
+    image: jenkins/jnlp-slave:alpine
+  - name: consumer
+    image: docker
+    command: ['cat']
+    tty: true
+    volumeMounts:
+    - name: dockersock
+      mountPath: /var/run/docker.sock
+  - name: producer
+    image: docker
+    command: ['cat']
+    tty: true
+    volumeMounts:
+    - name: dockersock
+      mountPath: /var/run/docker.sock
+  volumes:
+  - name: dockersock
+    hostPath:
+      path: /var/run/docker.sock
+"""
+        }
 
 	stages {
 	   stage('Git Clone') {
@@ -54,7 +72,7 @@ pipeline {
 					   container('producer') {
 					   script {
                             def tag = "producer:1.0.${BUILD_NUMBER}"
-                                     
+
                             buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
                             }
 						}
