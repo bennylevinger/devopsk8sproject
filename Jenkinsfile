@@ -27,7 +27,7 @@ podTemplate(label: label,
 				echo "Building consumer docker image..."
 			   // sh "printenv"
 				//sh "cd devopsk8sproject/consumer && docker build ."
-				def tag = "consumer:1.0.${BUILD_NUMBER}
+				def tag = "consumer:1.0.${BUILD_NUMBER}"
 				buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
 			}
 		}
@@ -37,7 +37,7 @@ podTemplate(label: label,
 						//sh "printenv"
         				
         				//sh "cd devopsk8sproject/producer && docker build ."
-						def tag = "producer:1.0.${BUILD_NUMBER}
+						def tag = "producer:1.0.${BUILD_NUMBER}"
 				        buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
         			}
         		}
