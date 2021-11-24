@@ -22,40 +22,41 @@ podTemplate(label: label,
         }
 	stages {
 	   stage('Git Clone') {
-			
-
-			steps {
-						echo "Cloning ....."
-			    sh "git clone https://github.com/bennylevinger/devopsk8sproject.git"
-                }
+		   steps {
+				   echo "Cloning ....."
+			       sh "git clone https://github.com/bennylevinger/devopsk8sproject.git"
+                 }
 		}
 		
 		stage('Docker consumer Build') {
-			container('consumer') {
+
 
 			   // sh "printenv"
 				//sh "cd devopsk8sproject/consumer && docker build ."
 			   steps {
+
 			   	echo "Building consumer docker image..."
-				def tag = "consumer:1.0.${BUILD_NUMBER}"
-             script {
-				buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
-				}
-				}
-			}
+			   	container('consumer') {
+				    def tag = "consumer:1.0.${BUILD_NUMBER}"
+                     script {
+				      buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
+				       }
+				   }
+			    }
 		}
 		stage('Docker producer Build') {
-        			container('producer') {
+
 
 						//sh "printenv"
         				
         				//sh "cd devopsk8sproject/producer && docker build ."
 						   steps {
 						   echo "Building consumer docker image..."
-						def tag = "producer:1.0.${BUILD_NUMBER}"
-						         script {
-				        buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
-				        }
+					   container('producer') {
+                            def tag = "producer:1.0.${BUILD_NUMBER}"
+                                     script {
+                            buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
+                            }
 						}
         			}
         		}
