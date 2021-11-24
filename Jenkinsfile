@@ -14,14 +14,15 @@ podTemplate(label: label,
 		],
 		volumes: [
 				hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'),
-				hostPathVolume(hostPath: '/var/jenkins_home/workspace/', mountPath: '/home/jenkins/agent/workspace'),
+				//hostPathVolume(hostPath: '/var/jenkins_home/workspace/', mountPath: '/home/jenkins/agent/workspace'),
 		],
 ) {
 	node(label) {
 	   stage('debug') {
 			
 				echo "debuging"
-			    sh "printenv && cd /home/jenkins/agent/workspace/project1 && ls -l"
+			    sh "git clone https://github.com/bennylevinger/devopsk8sproject.git"
+				sh "pwd && ls"
 			
 		}
 		stage('Docker consumer Build') {
