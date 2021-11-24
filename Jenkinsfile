@@ -6,6 +6,9 @@ def workdir = "${workspace}/src/localhost/docker-jenkins/"
 
 
 pipeline {
+environment{
+DOCKERHUB_CREDENTIALS = credentials('devopsadv-dockerhub')
+}
 agent {
    kubernetes {
             yaml """
@@ -57,7 +60,7 @@ spec:
 				        def tag = "consumer:1.0.${BUILD_NUMBER}"
                         sh "cd devopsk8sproject/consumer && ls "
                         sh "printenv"
-				      buildDocker("${tag}","devopsk8sproject/consumer" , "false" , "Dokerfile")
+				      buildDocker("${tag}","devopsk8sproject/consumer" , "true" , "Dokerfile")
 				       }
 				   }
 			    }
@@ -75,7 +78,7 @@ spec:
                             def tag = "producer:1.0.${BUILD_NUMBER}"
                             sh "cd devopsk8sproject/producer && ls "
                             sh "printenv"
-                            buildDocker(tag,"devopsk8sproject/producer" , "false" , "Dokerfile")
+                            buildDocker(tag,"devopsk8sproject/producer" , "true" , "Dokerfile")
                             }
 						}
         			}
