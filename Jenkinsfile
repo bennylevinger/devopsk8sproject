@@ -55,8 +55,8 @@ spec:
 			   	container('consumer') {
 			   	 script {
 				        def tag = "consumer:1.0.${BUILD_NUMBER}"
-
-				      buildDocker("${tag}","${workspace}/devopsk8sproject/consumer" , "false" , "Dokerfile")
+                        sh "printenv"
+				      buildDocker("${tag}","/home/jenkins/agent/workspace/project1/devopsk8sproject/consumer" , "false" , "Dokerfile")
 				       }
 				   }
 			    }
@@ -73,7 +73,7 @@ spec:
 					   script {
                             def tag = "producer:1.0.${BUILD_NUMBER}"
 
-                            buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
+                            buildDocker(tag,"/home/jenkins/agent/workspace/project1/devopsk8sproject/consumer" , false , "Dokerfile")
                             }
 						}
         			}
