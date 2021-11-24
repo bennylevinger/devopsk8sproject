@@ -35,8 +35,9 @@ pipeline {
 
 			   	echo "Building consumer docker image..."
 			   	container('consumer') {
-				    def tag = "consumer:1.0.${BUILD_NUMBER}"
-                     script {
+			   	 script {
+				        def tag = "consumer:1.0.${BUILD_NUMBER}"
+
 				      buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
 				       }
 				   }
@@ -51,8 +52,9 @@ pipeline {
 						   steps {
 						   echo "Building consumer docker image..."
 					   container('producer') {
+					   script {
                             def tag = "producer:1.0.${BUILD_NUMBER}"
-                                     script {
+                                     
                             buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
                             }
 						}
