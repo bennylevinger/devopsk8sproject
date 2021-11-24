@@ -15,11 +15,9 @@ podTemplate(label: label,
 				//hostPathVolume(hostPath: '/var/jenkins_home/workspace/', mountPath: '/home/jenkins/agent/workspace'),
 		],
 )
-
+node(label) {
  pipeline {
-	agent {
-            label label
-        }
+
 	stages {
 	   stage('Git Clone') {
 		   steps {
@@ -62,4 +60,5 @@ podTemplate(label: label,
         		}
 	}
  
+  }
 }
