@@ -2,7 +2,7 @@ def label = "docker-jenkins-${UUID.randomUUID().toString()}"
 def home = "/home/jenkins"
 def workspace = "${home}/workspace/build-docker-jenkins"
 def workdir = "${workspace}/src/localhost/docker-jenkins/"
-
+def agentwokspace = "/home/jenkins/agent/workspace/"
 def ecrRepoName = "my-jenkins"
 def tag = "$ecrRepoName:latest"
 
@@ -21,14 +21,14 @@ podTemplate(label: label,
 		stage('Docker consumer Build') {
 			container('consumer') {
 				echo "Building consumer docker image..."
-			    sh "cd /home/jenkins/agent/workspace/ && ls -l"
+			    sh "printenv && cd /home/jenkins/agent/workspace/ && ls -l"
 				//sh "cd /var/poject/devopsk8sproject/consumer && docker build"
 			}
 		}
 		stage('Docker producer Build') {
         			container('producer') {
         				echo "Building consumer docker image..."
-						sh "cd /home/jenkins/agent/workspace/ && ls -l"
+						sh "printenv && cd /home/jenkins/agent/workspace/ && ls -l"
         				
         				//sh "cd /var/poject/devopsk8sproject/producer && docker build"
         			}
