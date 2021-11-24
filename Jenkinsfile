@@ -20,13 +20,13 @@ podTemplate(label: label,
 		stage('Docker consumer Build') {
 			container('consumer') {
 				echo "Building consumer docker image..."
-				sh "cd consumer && docker build"
+				sh "cd devopsk8sproject/consumer && docker build"
 			}
 		}
 		stage('Docker producer Build') {
         			container('producer') {
         				echo "Building consumer docker image..."
-        				sh "cd producer && docker build"
+        				sh "cd devopsk8sproject/producer && docker build"
         			}
         		}
 	}
