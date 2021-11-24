@@ -21,7 +21,7 @@ podTemplate(label: label,
 	   stage('debug') {
 			
 				echo "debuging"
-			    sh "printenv && cd ${workspace} && ls -l"
+			    sh "printenv && cd /home/jenkins/agent/workspace/project1 && ls -l"
 			
 		}
 		stage('Docker consumer Build') {
