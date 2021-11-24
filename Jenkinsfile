@@ -1,10 +1,8 @@
+@Library('jenkins-shared-library') _
 def label = "docker-jenkins-${UUID.randomUUID().toString()}"
 def home = "/home/jenkins"
 def workspace = "${home}/workspace/build-docker-jenkins"
 def workdir = "${workspace}/src/localhost/docker-jenkins/"
-def agentwokspace = "/home/jenkins/agent/workspace/"
-def ecrRepoName = "my-jenkins"
-def tag = "$ecrRepoName:latest"
 
 podTemplate(label: label,
 		containers: [
@@ -18,26 +16,29 @@ podTemplate(label: label,
 		],
 ) {
 	node(label) {
-	   stage('debug') {
+	   stage('Git Clone') {
 			
-				echo "debuging"
+				echo "Cloning ....."
 			    sh "git clone https://github.com/bennylevinger/devopsk8sproject.git"
-				sh "pwd && ls"
-			
+
 		}
 		stage('Docker consumer Build') {
 			container('consumer') {
 				echo "Building consumer docker image..."
-			    sh "printenv"
-				sh "cd devopsk8sproject/consumer && docker build ."
+			   // sh "printenv"
+				//sh "cd devopsk8sproject/consumer && docker build ."
+				def tag = "consumer:1.0.${BUILD_NUMBER}
+				buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
 			}
 		}
 		stage('Docker producer Build') {
         			container('producer') {
         				echo "Building consumer docker image..."
-						sh "printenv"
+						//sh "printenv"
         				
-        				sh "cd devopsk8sproject/producer && docker build ."
+        				//sh "cd devopsk8sproject/producer && docker build ."
+						def tag = "producer:1.0.${BUILD_NUMBER}
+				        buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
         			}
         		}
 	}
