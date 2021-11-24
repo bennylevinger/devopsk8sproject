@@ -56,7 +56,7 @@ spec:
 			   	 script {
 				        def tag = "consumer:1.0.${BUILD_NUMBER}"
 
-				      buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
+				      buildDocker("${tag}","${workspace}/devopsk8sproject/consumer" , "false" , "Dokerfile")
 				       }
 				   }
 			    }
