@@ -28,7 +28,9 @@ podTemplate(label: label,
 			   // sh "printenv"
 				//sh "cd devopsk8sproject/consumer && docker build ."
 				def tag = "consumer:1.0.${BUILD_NUMBER}"
+             script {
 				buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
+				}
 			}
 		}
 		stage('Docker producer Build') {
@@ -38,7 +40,9 @@ podTemplate(label: label,
         				
         				//sh "cd devopsk8sproject/producer && docker build ."
 						def tag = "producer:1.0.${BUILD_NUMBER}"
+						         script {
 				        buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
+				        }
         			}
         		}
 	}
