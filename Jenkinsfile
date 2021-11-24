@@ -14,7 +14,7 @@ podTemplate(label: label,
 		],
 		volumes: [
 				hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'),
-			//	hostPathVolume(hostPath: '/home/jenkins/agent/workspace/', mountPath: '/var/poject'),
+			//	hostPathVolume(hostPath: '/var/jenkins_home/workspace/', mountPath: '/home/jenkins/agent/workspace'),
 		],
 ) {
 	node(label) {
