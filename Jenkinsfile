@@ -16,7 +16,6 @@ podTemplate(label: label,
 		],
 )
 pipeline {
-node(label) {
 
 
 	stages {
@@ -61,5 +60,5 @@ node(label) {
         		}
 	}
  
-  }
+
 }
