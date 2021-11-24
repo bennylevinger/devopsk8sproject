@@ -14,22 +14,31 @@ podTemplate(label: label,
 				hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'),
 				//hostPathVolume(hostPath: '/var/jenkins_home/workspace/', mountPath: '/home/jenkins/agent/workspace'),
 		],
-) {
-	node(label) {
+)
+
+ pipeline {
+	agent {
+            label label
+        }
+	stages {
 	   stage('Git Clone') {
 			
 				echo "Cloning ....."
+			steps {
 			    sh "git clone https://github.com/bennylevinger/devopsk8sproject.git"
-
+                {}
 		}
+		
 		stage('Docker consumer Build') {
 			container('consumer') {
 				echo "Building consumer docker image..."
 			   // sh "printenv"
 				//sh "cd devopsk8sproject/consumer && docker build ."
+			   steps {	
 				def tag = "consumer:1.0.${BUILD_NUMBER}"
              script {
 				buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
+				}
 				}
 			}
 		}
@@ -39,11 +48,14 @@ podTemplate(label: label,
 						//sh "printenv"
         				
         				//sh "cd devopsk8sproject/producer && docker build ."
+						   steps {
 						def tag = "producer:1.0.${BUILD_NUMBER}"
 						         script {
 				        buildDocker(tag,"${workspace}/devopsk8sproject/consumer" , false , "Dokerfile")
 				        }
+						}
         			}
         		}
 	}
+ 
 }
