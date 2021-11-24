@@ -14,23 +14,23 @@ podTemplate(label: label,
 		],
 		volumes: [
 				hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'),
-				hostPathVolume(hostPath: '${WORKSPACE}', mountPath: '${WORKSPACE}'),
+				hostPathVolume(hostPath: '${WORKSPACE}', mountPath: '/var/poject'),
 		],
 ) {
 	node(label) {
 		stage('Docker consumer Build') {
 			container('consumer') {
 				echo "Building consumer docker image..."
-			    sh "cd ${WORKSPACE} && ls -l"
-				//sh "cd ${WORKSPACE}/devopsk8sproject/consumer && docker build"
+			    sh "cd /var/poject && ls -l"
+				//sh "cd /var/poject/devopsk8sproject/consumer && docker build"
 			}
 		}
 		stage('Docker producer Build') {
         			container('producer') {
         				echo "Building consumer docker image..."
-						sh "cd ${WORKSPACE} && ls -l"
+						sh "cd /var/poject && ls -l"
         				
-        				//sh "cd ${WORKSPACE}/devopsk8sproject/producer && docker build"
+        				//sh "cd /var/poject/devopsk8sproject/producer && docker build"
         			}
         		}
 	}
