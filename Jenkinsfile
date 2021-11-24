@@ -8,7 +8,6 @@ def workdir = "${workspace}/src/localhost/docker-jenkins/"
 pipeline {
 agent {
    kubernetes {
-            label 'builder'
             yaml """
 apiVersion: v1
 kind: Pod
