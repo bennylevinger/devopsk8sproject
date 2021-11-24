@@ -21,6 +21,7 @@ podTemplate(label: label,
 			container('consumer') {
 				echo "Building consumer docker image..."
 				sh "pwd"
+				sh "echo ${WORKSPACE}"
 				//sh "cd devopsk8sproject/consumer && docker build"
 			}
 		}
@@ -28,6 +29,7 @@ podTemplate(label: label,
         			container('producer') {
         				echo "Building consumer docker image..."
 						sh "pwd"
+						sh "echo ${WORKSPACE}"
         				//sh "cd devopsk8sproject/producer && docker build"
         			}
         		}
