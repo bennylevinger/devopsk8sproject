@@ -26,7 +26,7 @@ podTemplate(label: label,
 				echo "Cloning ....."
 			steps {
 			    sh "git clone https://github.com/bennylevinger/devopsk8sproject.git"
-                {}
+                }
 		}
 		
 		stage('Docker consumer Build') {
