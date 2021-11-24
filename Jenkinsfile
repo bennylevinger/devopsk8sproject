@@ -6,6 +6,7 @@ def workdir = "${workspace}/src/localhost/docker-jenkins/"
 
 
 pipeline {
+agent {
    kubernetes {
             label 'builder'
             yaml """
@@ -35,7 +36,7 @@ spec:
       path: /var/run/docker.sock
 """
         }
-
+   }
 	stages {
 	   stage('Git Clone') {
 		   steps {
