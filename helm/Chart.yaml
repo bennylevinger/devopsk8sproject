@@ -1,8 +1,7 @@
-name: ohad-project
-description: A generated Helm Chart for ohad-project from Skippbox Kompose
-version: 0.0.1
+name: benny-rabbit-cons-prod
+description: A Helm chart for Kubernetes
+
 apiVersion: v1
-keywords:
-  - ohad-project
-sources:
-home:
+version: 0.1.0
+type: application
+appVersion: "1.1.1"
