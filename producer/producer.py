@@ -29,7 +29,7 @@ if __name__ == '__main__':
     parameters = pika.ConnectionParameters(args.server,
                                            int(args.port),
                                            '/',
-                                           credentials)
+                                           credentials,heartbeat=5)
     connection = pika.BlockingConnection(parameters)
     channel = connection.channel()
     q = channel.queue_declare('pc')
