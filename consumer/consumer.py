@@ -32,7 +32,7 @@ if __name__ == '__main__':
     LOG = logging.getLogger(__name__)
     credentials = pika.PlainCredentials('user', '')
 	
-    parameters = pika.ConnectionParameters(args.server,int(args.port),'/',credentials,socket_timeout=100,stack_timeout=100)
+    parameters = pika.ConnectionParameters(args.server,int(args.port),'/',credentials)
     connection = pika.BlockingConnection(parameters)
     channel = connection.channel()
 
