@@ -1,4 +1,4 @@
-import pika, logging, sys, argparse, time
+import pika, logging, sys, argparse
 from argparse import RawTextHelpFormatter
 from time import sleep
 
