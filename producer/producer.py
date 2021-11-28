@@ -26,9 +26,7 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     LOG = logging.getLogger(__name__)
     credentials = pika.PlainCredentials('user', '')
-    parameters = pika.ConnectionParameters(args.server,
-                                           int(args.port),
-                                           '/',credentials, heartbeat=10,socket_timeout=10,stack_timeout=10,blocked_connection_timeout=10)
+   parameters = pika.ConnectionParameters(args.server,int(args.port),'/',credentials,heartbeat=10,socket_timeout=10,stack_timeout=10,blocked_connection_timeout=10)
     connection = pika.BlockingConnection(parameters)
     channel = connection.channel()
     q = channel.queue_declare('pc')
