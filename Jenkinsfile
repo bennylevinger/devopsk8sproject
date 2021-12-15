@@ -6,9 +6,7 @@ def workdir = "${workspace}/src/localhost/docker-jenkins/"
 
 
 pipeline {
-environment{
-DOCKERHUB_CREDENTIALS = credentials('devopsadv-dockerhub')
-}
+
 agent {
    kubernetes {
             yaml """
